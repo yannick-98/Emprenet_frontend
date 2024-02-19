@@ -1,0 +1,14 @@
+::-webkit-scrollbar {
+    width: 4px;
+    /*Anchodelabarradedesplazamiento*/background-color: #ffffff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #dbd9d9; /* Color de la barra de desplazamiento */
+    border-radius: 6px; /* Bordes redondeados de la barra de desplazamiento */
+  }
