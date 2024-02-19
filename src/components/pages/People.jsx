@@ -63,7 +63,7 @@ const People = () => {
     }
 
     const followersList = () => {
-        if (followers.length === 0) {
+        if (!followers || followers.length === 0) {
             return <p className='text-gray-400'>No followers</p>
         }
         const filtered = followers.filter(follow => {
@@ -85,7 +85,7 @@ const People = () => {
     }
 
     const followingList = () => {
-        if (following.length === 0) {
+        if (!following || following.length === 0) {
             return <p className='text-gray-400'>No following</p>
         }
         const filtered = following.filter(follow => {
