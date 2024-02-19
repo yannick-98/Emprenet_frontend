@@ -1,3 +1,3 @@
 export const Global = {
-    url: 'http://localhost:3902/api/'
+    url: import.meta.env.VITE_API_URL
 }
