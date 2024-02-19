@@ -10,7 +10,7 @@ const People = () => {
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
     const [discover, setDiscover] = useState([])
-    const [list, setList] = useState('followers')
+    const [list, setList] = useState('discover')
     const [searchQuery, setSearchQuery] = useState('');
     const [error, setError] = useState('')
 
