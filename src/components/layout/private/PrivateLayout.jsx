@@ -19,7 +19,7 @@ const PrivateLayout = () => {
         return (
             <>
                 <Header />
-                <section className=' flex flex-col lg:flex-row-reverse gap-3 justify-center p-3'>
+                <section className=' flex flex-col lg:flex-row-reverse gap-3 justify-center p-3 pb-12 sm:pb-3'>
                     <section className='flex flex-col gap-2 w-full max-w-[1000px] lg:max-w-[500px] border-2 rounded-lg bg-white border-zinc-200 p-2'>
                         <CreatePost />
                     </section>
