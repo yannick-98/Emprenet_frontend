@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { Global } from '../../helpers/Global'
 import UseAuth from '../../hooks/UseAuth'
-import getFollows from '../../helpers/GetFollows'
 import { NavLink } from 'react-router-dom'
 
 
 const People = () => {
     const { auth, counts } = UseAuth()
     const token = localStorage.getItem('token')
-    const { followers, following, error } = getFollows()
+    const [followers, setFollowers] = useState([])
+    const [following, setFollowing] = useState([])
     const [discover, setDiscover] = useState([])
     const [list, setList] = useState('followers')
     const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState('')
 
     useEffect(() => {
         getDiscover()
+        getFollowers()
+        getFollowing()
     }, [])
 
     const getDiscover = async () => {
@@ -34,12 +37,44 @@ const People = () => {
             console.log(error)
         }
     }
+    const getFollowers = async () => {
+        try {
+            const response = await fetch(`${Global.url}follow/followers`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            })
+            const res = await response.json()
+            setFollowers(res.follows)
+        }
+        catch (error) {
+            setError('followers')
+            console.log(error)
+        }
+    }
+    const getFollowing = async () => {
+        try {
+            const response = await fetch(`${Global.url}follow/following`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                }
+            })
+            const res = await response.json()
+            setFollowing(res.follows)
+        } catch (error) {
+            setError('following')
+            console.log(error)
+        }
+    }
 
     const discoverList = () => {
         if (!searchQuery.length > 0) {
             return (
-                <div className='flex items-center justify-center text-center w-full 
-                 '>
+                <div className='flex items-center justify-center text-center w-full'>
                     <p className='text-gray-400'>Enter a name to search for a user </p>
                 </div>
             )
