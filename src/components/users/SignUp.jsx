@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useForm from '../../hooks/useForm'
 import { Global } from '../../helpers/Global'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 
 const SignUp = () => {
     const { form, changed } = useForm({})
-    const navigate = useNavigate()
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -47,7 +46,15 @@ const SignUp = () => {
             body: JSON.stringify(newUser)
         })
         const data = await request.json()
-        console.log(data)
+        if (data.status === "error") {
+            setError(data.message)
+            setTimeout(() => {
+                setError('')
+            }, 2000)
+            return
+        }
+        setSuccess(true)
+        window.location.href = '/LogIn'
     }
 
     return (
@@ -71,6 +78,9 @@ const SignUp = () => {
 
                 {error &&
                     <p className='w-full py-1 my-5 mx-auto text-red-500 font-bold text-center'>{error}</p>}
+
+                {success &&
+                    <p className='w-full py-1 my-5 mx-auto text-green-500 font-bold text-center'>Account created succesfully</p>}
 
                 <button type='submit' className='w-full py-1 my-5 mx-auto border-2 border-gray-400 rounded-md 
                     outline-none bg-blue-500 hover:bg-blue-400 text-white font-bold text-center'>Sign Up</button>

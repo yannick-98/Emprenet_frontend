@@ -32,14 +32,17 @@ const Nav = () => {
                 <hr />
                 <br />
                 <section className='text-sm text-start'>
-                    <NavLink onClick={openMenu} to={`/User/MyProfile`} className="block p-2 hover:bg-zinc-200">
-                        <i className="fa-solid fa-user">My profile</i>
+                    <NavLink onClick={openMenu} to={`/User/MyProfile`} className="flex gap-1 items-center p-2 hover:bg-zinc-200">
+                        <i className="fa-solid fa-user"></i>
+                        <p>My profile</p>
                     </NavLink>
-                    <NavLink onClick={openMenu} to={"/User/Settings"} className="block p-2 hover:bg-zinc-200">
-                        <i className="fa-solid fa-gear">Settings</i>
+                    <NavLink onClick={openMenu} to={"/User/Settings"} className="flex gap-1 items-center p-2 hover:bg-zinc-200">
+                        <i className="fa-solid fa-gear"></i>
+                        <p>Settings</p>
                     </NavLink>
-                    <button onClick={logout} className="block p-2 hover:bg-zinc-200">
-                        <i className="fa-solid fa-sign-out">Logout</i>
+                    <button onClick={logout} className="flex gap-1 items-center p-2 hover:bg-zinc-200">
+                        <i className="fa-solid fa-sign-out"></i>
+                        <p>Logout</p>
                     </button>
                 </section>
             </div>
