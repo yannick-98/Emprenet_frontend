@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import UseAuth from '../../hooks/UseAuth'
 import { Global } from '../../helpers/Global'
 import useForm from '../../hooks/useForm'
-
+import UserImg from '../../assets/img/user.png'
 
 const MyProfile = () => {
     const { auth, counts } = UseAuth()
     const [myPosts, setMyPosts] = useState([])
     const [edit, setEdit] = useState(false)
     let { form, changed } = useForm({})
-    const avatar = auth.avatar ? (Global.url + "user/avatar/" + auth.avatar) : '/src/assets/img/user.png'
+    const avatar = auth.avatar ? (Global.url + "user/avatar/" + auth.avatar) : UserImg
     const token = localStorage.getItem('token')
 
     const openEdit = () => {
@@ -80,10 +80,13 @@ const MyProfile = () => {
             try {
                 if (form.file0) {
                     const fileInput = document.querySelector('#file0')
-                    console.log(fileInput)
-                    const formData = new FormData()
-                    formData.append('file0', fileInput.files[0])
-                    console.log(fileInput.files)
+                    const file = fileInput.files[0]
+                    let formData = new FormData()
+                    formData.append('file0', file)
+                    for (var key of formData.entries()) {
+                        console.log(key);
+                    }
+                    console.log(formData)
                     const response = await fetch(`${Global.url}user/uploadAvatar`, {
                         method: 'POST',
                         headers: {
@@ -94,7 +97,7 @@ const MyProfile = () => {
                     const res = await response.json()
                     console.log(res)
                 }
-
+                if (!form.name && !form.nickName && !form.email && !form.password) return
                 const data = {
                     name: form.name ? form.name : auth.name,
                     nickName: form.nickName ? form.nickName : auth.nickName,
@@ -120,13 +123,13 @@ const MyProfile = () => {
             <div className='border-2 border-zinc-200 bg-slate-50 p-2 rounded-md text-sm'>
                 <form onSubmit={handleSubmit} className='flex flex-col space-y-2'>
                     <label >Name</label>
-                    <input onChange={changed} type="text" name="name" id="name" />
+                    <input onChange={changed} autoComplete='name' type="text" name="name" id="name" />
                     <label >NickName</label>
-                    <input onChange={changed} type="text" name="nickName" id="nickName" />
+                    <input onChange={changed} autoComplete='nickname' type="text" name="nickName" id="nickName" />
                     <label >Email</label>
-                    <input onChange={changed} type="email" name="email" id="email" />
+                    <input onChange={changed} autoComplete='email' type="email" name="email" id="email" />
                     <label >Password</label>
-                    <input onChange={changed} type="password" name="password" id="password" />
+                    <input onChange={changed} autoComplete='current-password' type="password" name="password" id="password" />
                     <label >Avatar</label>
                     <input onChange={changed} type="file" name="file0" id="file0" />
                     <button type='submit' className='bg-blue-500 text-white rounded-md'>Save</button>
