@@ -84,9 +84,6 @@ const MyProfile = () => {
                     const file = fileInput.files[0]
                     let formData = new FormData()
                     formData.append('file0', file)
-                    for (var key of formData.entries()) {
-                        console.log(key);
-                    }
                     const response = await fetch(`${Global.url}user/uploadAvatar`, {
                         method: 'POST',
                         headers: {
