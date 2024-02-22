@@ -123,7 +123,7 @@ const Chats = () => {
             <section className=' border rounded p-1'>
                 <input
                     type="text"
-                    placeholder="Ingrese su búsqueda"
+                    placeholder="Search"
                     value={searchQuery}
                     onChange={handleInputChange}
                     className='w-full text-center'

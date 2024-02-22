@@ -86,7 +86,6 @@ const MyProfile = () => {
                     for (var key of formData.entries()) {
                         console.log(key);
                     }
-                    console.log(formData)
                     const response = await fetch(`${Global.url}user/uploadAvatar`, {
                         method: 'POST',
                         headers: {

@@ -73,11 +73,7 @@ const People = () => {
 
     const discoverList = () => {
         if (!searchQuery.length > 0) {
-            return (
-                <div className='flex items-center justify-center text-center w-full'>
-                    <p className='text-gray-400'>Enter a name to search for a user </p>
-                </div>
-            )
+            return
         }
 
         const filtered = discover.filter(user => {
@@ -187,7 +183,7 @@ const People = () => {
             <section className=' border rounded p-1'>
                 <input
                     type="text"
-                    placeholder="Ingrese su búsqueda"
+                    placeholder="Search"
                     value={searchQuery}
                     onChange={handleInputChange}
                     className='w-full text-center'
