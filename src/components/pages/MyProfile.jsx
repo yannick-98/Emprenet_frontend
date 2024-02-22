@@ -8,6 +8,7 @@ const MyProfile = () => {
     const { auth, counts } = UseAuth()
     const [myPosts, setMyPosts] = useState([])
     const [edit, setEdit] = useState(false)
+    const [error, setError] = useState('')
     let { form, changed } = useForm({})
     const avatar = auth.avatar ? (Global.url + "user/avatar/" + auth.avatar) : UserImg
     const token = localStorage.getItem('token')
@@ -94,7 +95,14 @@ const MyProfile = () => {
                         body: formData
                     })
                     const res = await response.json()
-                    console.log(res)
+                    if (res.status == "error") {
+                        setError(res.message)
+                        setTimeout(() => {
+                            setError('')
+                        }, 3000)
+                    } else {
+                        setEdit(false)
+                    }
                 }
                 if (!form.name && !form.nickName && !form.email && !form.password) return
                 const data = {
@@ -131,6 +139,7 @@ const MyProfile = () => {
                     <input onChange={changed} autoComplete='current-password' type="password" name="password" id="password" />
                     <label >Avatar</label>
                     <input onChange={changed} type="file" name="file0" id="file0" />
+                    {error && <p className='text-red-500'>{error}</p>}
                     <button type='submit' className='bg-blue-500 text-white rounded-md'>Save</button>
                 </form>
             </div>
